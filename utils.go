@@ -1,9 +1,9 @@
 package utils
 
 import (
+	"bytes"
 	"regexp"
 	"strings"
-	"bytes"
 )
 
 //检查字符串,去掉特殊字符
@@ -21,7 +21,7 @@ func CheckCharDoSpecial(s string, char byte, regs string) string {
 				buf.Reset()
 			}
 			//处理最后一批数据
-			if buf.Len() > 0 && key == len(arr) - 1 {
+			if buf.Len() > 0 && key == len(arr)-1 {
 				result = append(result, buf.String())
 			}
 		}
