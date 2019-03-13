@@ -49,3 +49,24 @@ func TestInArray(t *testing.T) {
 		}
 	}
 }
+
+func TestIn_Array(t *testing.T) {
+	tests := []struct{
+		need interface{}
+		haystack interface{}
+		expected bool
+		index int
+	} {
+		{1, []int{1,2,3}, true, 0},
+		{"b", []string{"a", "b"}, true, 1},
+		{22, []int{1,2,3}, false, -1},
+		{1.78, []float64{1,2,3}, false, -1},
+		{3.78, []float64{1,2,3, 3.78}, true, 3},
+	}
+	for _, item := range tests {
+		actual, idx := In_Array(item.need, item.haystack)
+		if actual != item.expected || idx != item.index {
+			t.Errorf("need: %v, haystack: %v, actual: %v, index: %d, i: %d", item.need, item.haystack, actual, item.index, idx)
+		}
+	}
+}

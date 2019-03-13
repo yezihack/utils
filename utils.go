@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"regexp"
 	"strings"
+	"reflect"
 )
 
 //检查字符串,去掉特殊字符
@@ -59,4 +60,24 @@ func InArray(need interface{}, haystack interface{}) bool {
 		return false
 	}
 	return false
+}
+//判断某一个值是否含在切片之中
+func In_Array(val interface{}, array interface{}) (exists bool, index int) {
+	exists = false
+	index = -1
+
+	switch reflect.TypeOf(array).Kind() {
+	case reflect.Slice:
+		s := reflect.ValueOf(array)
+
+		for i := 0; i < s.Len(); i++ {
+			if reflect.DeepEqual(val, s.Index(i).Interface()) == true {
+				index = i
+				exists = true
+				return
+			}
+		}
+	}
+
+	return
 }
