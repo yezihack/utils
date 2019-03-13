@@ -29,3 +29,23 @@ func TestCheckCharDoSpecial(t *testing.T) {
 		}
 	}
 }
+
+func TestInArray(t *testing.T) {
+	tests := []struct{
+		need interface{}
+		haystack interface{}
+		expected bool
+	} {
+		{1, []int{1,2,3}, true},
+		{"a", []string{"a", "b"}, true},
+		{22, []int{1,2,3}, false},
+		{1.78, []float64{1,2,3}, false},
+		{3.78, []float64{1,2,3, 3.78}, true},
+	}
+	for _, item := range tests {
+		actual := InArray(item.need, item.haystack)
+		if actual != item.expected {
+			t.Errorf("need: %v, haystack: %v, actual: %v", item.need, item.haystack, actual)
+		}
+	}
+}

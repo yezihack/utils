@@ -18,7 +18,7 @@ var (
 	MasterDB Modeler //定义一个查询接口
 )
 
-func init() {
+func initMysql() {
 	db := InitDB(config) //获取数据库连接对象
 	model := NewDB(db)   //实例model
 	MasterDB = model
